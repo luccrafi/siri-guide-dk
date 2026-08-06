@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>SIRI Interview Preparation | Case 26/095876</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0b2c4d;
+      --primary-mid: #01417d;
+      --primary-light: #0a5aa3;
+      --accent: #c8102e;
+      --success: #0f7a4c;
+      --success-bg: #ecfdf5;
+      --warning-bg: #fff7ed;
+      --warning-text: #9a3412;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #0f172a;
+      --text-secondary: #475569;
+      --border: #e2e8f0;
+      --shadow: 0 1px 3px rgba(15,23,42,0.06), 0 4px 12px rgba(15,23,42,0.04);
+      --radius: 10px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'Noto Sans Bengali', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* ========== HEADER ========== */
+    .topbar {
+      background: var(--primary);
+      color: white;
+      padding: 8px 16px;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .topbar-left { opacity: 0.85; }
+    .lang-switch {
+      display: flex;
+      background: rgba(255,255,255,0.12);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .lang-switch button.active {
+      background: white;
+      color: var(--primary);
+    }
+    .header {
+      background: linear-gradient(145deg, var(--primary) 0%, var(--primary-mid) 60%, var(--primary-light) 100%);
+      color: white;
+      padding: 22px 20px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::after {
+      content: "";
+      position: absolute;
+      right: -40px; top: -40px;
+      width: 160px; height: 160px;
+      border: 20px solid rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+    .header-eyebrow {
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .header h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+    .header .sub { font-size: 0.88rem; opacity: 0.88; }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .meta-pill {
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(4px);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    /* ========== NAV ========== */
+    .nav-wrap {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .nav {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      padding: 10px 16px;
+      max-width: 900px;
+      margin: 0 auto;
+      scrollbar-width: none;
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav button {
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--primary-mid);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .nav button:hover { border-color: var(--primary-light); color: var(--primary-light); }
+    .nav button.active {
+      background: var(--primary-mid);
+      color: white;
+      border-color: var(--primary-mid);
+    }
+    /* ========== MAIN ========== */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 20px 16px 80px;
+    }
+    .section { display: none; animation: fadeIn 0.3s ease; }
+    .section.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2.section-title {
+      font-size: 1.15rem;
+      color: var(--primary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h2.section-title .count {
+      font-size: 12px;
+      background: #e2e8f0;
+      color: var(--text-secondary);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    /* ========== CARDS ========== */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: 0 4px 16px rgba(15,23,42,0.08); }
+    .card-header {
+      padding: 14px 16px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--primary);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+      background: #f8fafc;
+    }
+    .card-header:hover { background: #f1f5f9; }
+    .card-header .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px; height: 24px;
+      background: var(--primary-mid);
+      color: white;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .card-header .title { flex: 1; }
+    .card-header .arrow {
+      font-size: 12px;
+      color: var(--text-secondary);
+      transition: transform 0.25s;
+    }
+    .card.open .card-header .arrow { transform: rotate(180deg); }
+    .card-body {
+      display: none;
+      padding: 0 16px 16px;
+      border-top: 1px solid var(--border);
+    }
+    .card.open .card-body { display: block; padding-top: 14px; }
+    .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .possible-box {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      font-size: 0.9rem;
+    }
+    .possible-box ul { margin: 4px 0 0 18px; }
+    .possible-box li { margin-bottom: 3px; }
+    .answer-box {
+      background: var(--success-bg);
+      border-left: 4px solid var(--success);
+      padding: 14px 16px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+    .answer-box .bn {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed #a7f3d0;
+      color: #065f46;
+      font-family: 'Noto Sans Bengali', sans-serif;
+    }
+    .bn-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #047857;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    /* ========== LISTS ========== */
+    .info-list { list-style: none; }
+    .info-list li {
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.92rem;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .info-list .icon {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .icon.ok { background: var(--success-bg); color: var(--success); }
+    .icon.no { background: #fef2f2; color: var(--accent); }
+    .checklist li {
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .checklist li:hover { background: #f8fafc; }
+    .checklist li.done {
+      opacity: 0.55;
+      text-decoration: line-through;
+    }
+    .checklist input {
+      width: 18px; height: 18px;
+      margin-top: 2px;
+      accent-color: var(--success);
+      flex-shrink: 0;
+    }
+    /* ========== DOCS ========== */
+    .doc-grid { display: grid; gap: 10px; }
+    .doc-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .doc-icon {
+      width: 36px; height: 36px;
+      background: #eff6ff;
+      color: var(--primary-mid);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .doc-card strong { display: block; font-size: 0.92rem; color: var(--primary); margin-bottom: 2px; }
+    .doc-card span { font-size: 0.82rem; color: var(--text-secondary); }
+    /* ========== TIP ========== */
+    .tip {
+      background: var(--warning-bg);
+      border: 1px solid #fed7aa;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: var(--warning-text);
+      line-height: 1.55;
+    }
+    .tip strong { display: block; margin-bottom: 4px; }
+    /* ========== SEARCH ========== */
+    .search-wrap {
+      position: relative;
+      margin-bottom: 16px;
+    }
+    .search-wrap input {
+      width: 100%;
+      padding: 12px 16px 12px 40px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: white;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .search-wrap input:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(10,90,163,0.12);
+    }
+    .search-wrap .search-icon {
+      position: absolute;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      font-size: 15px;
+    }
+    /* ========== FOOTER ========== */
+    .footer {
+      text-align: center;
+      padding: 24px 16px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+      background: white;
+    }
+    /* ========== FAB ========== */
+    .fab {
+      position: fixed;
+      bottom: 24px; right: 20px;
+      width: 52px; height: 52px;
+      background: var(--primary-mid);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(1,65,125,0.35);
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s, background 0.15s;
+    }
+    .fab:hover { background: var(--primary); transform: scale(1.05); }
+    .fab:active { transform: scale(0.96); }
+    /* Print */
+    @media print {
+      .topbar, .nav-wrap, .fab, .search-wrap { display: none !important; }
+      .card-body { display: block !important; }
+      .card { break-inside: avoid; }
+      body { background: white; }
+    }
+    @media (max-width: 480px) {
+      .header h1 { font-size: 1.2rem; }
+      .meta-pill { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">Udlændinge- og Integrationsministeriet · SIRI</div>
+  <div class="lang-switch">
+    <button class="active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button onclick="setLang('bn')" id="btn-bn">বাংলা</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-eyebrow" data-en="Danish Agency for International Recruitment and Integration" data-bn="ড্যানিশ এজেন্সি ফর ইন্টারন্যাশনাল রিক্রুটমেন্ট অ্যান্ড ইন্টিগ্রেশন">Danish Agency for International Recruitment and Integration</div>
+  <h1 data-en="SIRI Interview Preparation Guide" data-bn="সিরী ইন্টারভিউ প্রস্তুতি গাইড">SIRI Interview Preparation Guide</h1>
+  <div class="sub" data-en="Case clarification briefing · Complete bilingual protocol" data-bn="কেস ক্ল্যারিফিকেশন ব্রিফিং · সম্পূর্ণ দ্বিভাষিক প্রোটোকল">Case clarification briefing · Complete bilingual protocol</div>
+  <div class="meta-row">
+    <span class="meta-pill">📅 7 Aug 2026 · 09:00</span>
+    <span class="meta-pill">📍 Carl Jacobsens Vej 39, Valby</span>
+    <span class="meta-pill"># 26/095876</span>
+    <span class="meta-pill">💰 DKK 37,170</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav" id="nav">
+    <button class="active" data-sec="rules" data-en="Rules" data-bn="নিয়ম">Rules</button>
+    <button data-sec="questions" data-en="Questions" data-bn="প্রশ্ন">Questions</button>
+    <button data-sec="checklist" data-en="Checklist" data-bn="চেকলিস্ট">Checklist</button>
+    <button data-sec="documents" data-en="Documents" data-bn="নথি">Documents</button>
+    <button data-sec="final" data-en="Final Tips" data-bn="পরামর্শ">Final Tips</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ================= RULES ================= -->
+  <div class="section active" id="rules">
+    <h2 class="section-title">
+      <span data-en="General Rules for Answering" data-bn="উত্তর দেওয়ার সাধারণ নিয়ম">General Rules for Answering</span>
+    </h2>
+    <ul class="info-list">
+      <li>
+        <span class="icon ok">✓</span>
+        <span data-en="Speak <strong>slowly and in short, clear sentences</strong>. An official interpreter will be present." data-bn="<strong>ধীরে এবং ছোট, স্পষ্ট বাক্যে</strong> কথা বলুন। একজন অফিসিয়াল দোভাষী উপস্থিত থাকবেন।">Speak <strong>slowly and in short, clear sentences</strong>. An official interpreter will be present.</span>
+      </li>
+      <li>
+        <span class="icon ok">✓</span>
+        <span data-en="Answer <strong>only what is asked</strong>. Do not volunteer extra information." data-bn="<strong>শুধুমাত্র যা জিজ্ঞাসা করা হয়েছে</strong> তার উত্তর দিন। অতিরিক্ত তথ্য নিজে থেকে বলবেন না।">Answer <strong>only what is asked</strong>. Do not volunteer extra information.</span>
+      </li>
+      <li>
+        <span class="icon ok">✓</span>
+        <span data-en="Be <strong>consistent</strong> with your employment contract, job description and submitted documents." data-bn="আপনার চাকরির চুক্তি, জব ডেসক্রিপশন এবং জমা দেওয়া নথির সাথে <strong>সামঞ্জস্যপূর্ণ</strong> থাকুন।">Be <strong>consistent</strong> with your employment contract, job description and submitted documents.</span>
+      </li>
+      <li>
+        <span class="icon ok">✓</span>
+        <span data-en="Be <strong>honest and factual</strong>. SIRI checks genuineness of the job, salary, duties and recruitment." data-bn="<strong>সৎ এবং তথ্যভিত্তিক</strong> থাকুন। SIRI চাকরি, বেতন, দায়িত্ব এবং নিয়োগ প্রক্রিয়ার সত্যতা যাচাই করে।">Be <strong>honest and factual</strong>. SIRI checks genuineness of the job, salary, duties and recruitment.</span>
+      </li>
+      <li>
+        <span class="icon ok">✓</span>
+        <span data-en='If you do not understand: “Could you please repeat or explain the question?”' data-bn='বুঝতে না পারলে বলুন: “Could you please repeat or explain the question?”'>If you do not understand: “Could you please repeat or explain the question?”</span>
+      </li>
+      <li>
+        <span class="icon ok">✓</span>
+        <span data-en='Never guess. Say: “I do not remember exactly / I need to check the contract.”' data-bn='অনুমান করবেন না। বলুন: “I do not remember exactly / I need to check the contract.”'>Never guess. Say: “I do not remember exactly / I need to check the contract.”</span>
+      </li>
+      <li>
+        <span class="icon ok">✓</span>
+        <span data-en="Focus on the <strong>current Sales Consultant role</strong>. Explain the previous Management Assistant application only when asked." data-bn="<strong>বর্তমান Sales Consultant পদের</strong> উপর ফোকাস করুন। আগের Management Assistant আবেদন শুধুমাত্র জিজ্ঞাসা করলে ব্যাখ্যা করুন।">Focus on the <strong>current Sales Consultant role</strong>. Explain the previous Management Assistant application only when asked.</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ================= QUESTIONS ================= -->
+  <div class="section" id="questions">
+    <h2 class="section-title">
+      <span data-en="All Questions & Model Answers" data-bn="সকল প্রশ্ন ও মডেল উত্তর">All Questions & Model Answers</span>
+      <span class="count">8</span>
+    </h2>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" placeholder="Search questions or answers…" oninput="filterCards()" data-en-placeholder="Search questions or answers…" data-bn-placeholder="প্রশ্ন বা উত্তর খুঁজুন…">
+    </div>
+
+    <!-- Q1 -->
+    <div class="card" data-keywords="personal background education experience family denmark">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="num">1</span>
+        <span class="title" data-en="Personal & Background Questions" data-bn="ব্যক্তিগত ও পটভূমি সংক্রান্ত প্রশ্ন">Personal & Background Questions</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="label" data-en="Possible questions" data-bn="সম্ভাব্য প্রশ্ন">Possible questions</div>
+        <div class="possible-box">
+          <ul>
+            <li data-en="Tell us about yourself / your background." data-bn="আপনার সম্পর্কে / আপনার পটভূমি বলুন।">Tell us about yourself / your background.</li>
+            <li data-en="What is your education and previous work experience?" data-bn="আপনার শিক্ষা ও পূর্বের কাজের অভিজ্ঞতা কী?">What is your education and previous work experience?</li>
+            <li data-en="Why do you want to work in Denmark?" data-bn="কেন আপনি ডেনমার্কে কাজ করতে চান?">Why do you want to work in Denmark?</li>
+            <li data-en="Do you have family in Denmark?" data-bn="ডেনমার্কে আপনার পরিবার আছে কি?">Do you have family in Denmark?</li>
+          </ul>
+        </div>
+        <div class="label" data-en="Recommended answer" data-bn="প্রস্তাবিত উত্তর">Recommended answer</div>
+        <div class="answer-box">
+          “My name is R A Md Motiur Rahman Rafi. I am from Bangladesh. I have previous experience as a Sales Officer. I applied for this Sales Consultant position because it matches my sales background and the company needs someone focused on B2B sales growth.”
+          <div class="bn">
+            <div class="bn-label">বাংলা</div>
+            “আমার নাম R A Md Motiur Rahman Rafi। আমি বাংলাদেশ থেকে এসেছি। আমার Sales Officer হিসেবে পূর্ব অভিজ্ঞতা আছে। আমি এই Sales Consultant পদে আবেদন করেছি কারণ এটি আমার সেলস ব্যাকগ্রাউন্ডের সাথে মিলে এবং কোম্পানির B2B সেলস বৃদ্ধির জন্য একজন লোক দরকার।”
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="card open" data-keywords="job title duties tasks disco hours work location sales consultant daily">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="num">2</span>
+        <span class="title" data-en="Job Offer & Daily Duties (Most Important)" data-bn="চাকরির অফার ও দৈনন্দিন দায়িত্ব (সবচেয়ে গুরুত্বপূর্ণ)">Job Offer & Daily Duties (Most Important)</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="label" data-en="Possible questions" data-bn="সম্ভাব্য প্রশ্ন">Possible questions</div>
+        <div class="possible-box">
+          <ul>
+            <li data-en="What is your job title?" data-bn="আপনার পদবী কী?">What is your job title?</li>
+            <li data-en="What are your exact daily tasks and responsibilities?" data-bn="আপনার সঠিক দৈনন্দিন কাজ ও দায়িত্বগুলো কী?">What are your exact daily tasks and responsibilities?</li>
+            <li data-en="What is the DISCO code / classification of the job?" data-bn="চাকরির DISCO কোড / শ্রেণীবিভাগ কী?">What is the DISCO code / classification of the job?</li>
+            <li data-en="Where will you work every day?" data-bn="আপনি প্রতিদিন কোথায় কাজ করবেন?">Where will you work every day?</li>
+            <li data-en="How many hours per week?" data-bn="সপ্তাহে কত ঘণ্টা কাজ?">How many hours per week?</li>
+          </ul>
+        </div>
+        <div class="label" data-en="Recommended answer (use almost word-for-word)" data-bn="প্রস্তাবিত উত্তর (প্রায় হুবহু ব্যবহার করুন)">Recommended answer (use almost word-for-word)</div>
+        <div class="answer-box">
+          “My job title is Sales Consultant (DISCO 332200).<br><br>
+          My main duty is B2B sales development and acquiring corporate clients.<br><br>
+          Daily tasks include:<br>
+          • Identifying and contacting prospective corporate clients (cold calling and outreach)<br>
+          • Preparing sales proposals, price quotes, and service contracts<br>
+          • Conducting client presentation meetings<br>
+          • Following up with existing accounts and maintaining client relationships<br><br>
+          I work 37 hours per week, Monday to Friday. Work is at the company’s address and at client locations as needed.”
+          <div class="bn">
+            <div class="bn-label">বাংলা</div>
+            “আমার পদবী Sales Consultant (DISCO 332200)।<br><br>
+            আমার প্রধান দায়িত্ব B2B সেলস ডেভেলপমেন্ট এবং কর্পোরেট ক্লায়েন্ট অর্জন।<br><br>
+            দৈনন্দিন কাজ:<br>
+            • সম্ভাব্য কর্পোরেট ক্লায়েন্ট খুঁজে বের করা ও যোগাযোগ করা (কোল্ড কলিং)<br>
+            • সেলস প্রপোজাল, প্রাইস কোট এবং সার্ভিস কন্ট্রাক্ট তৈরি করা<br>
+            • ক্লায়েন্ট প্রেজেন্টেশন মিটিং করা<br>
+            • বিদ্যমান অ্যাকাউন্ট ফলো-আপ এবং সম্পর্ক রক্ষা করা<br><br>
+            আমি সপ্তাহে ৩৭ ঘণ্টা কাজ করি, সোমবার থেকে শুক্রবার। কাজ কোম্পানির ঠিকানায় এবং প্রয়োজন অনুসারে ক্লায়েন্টের লোকেশনে।”
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="card" data-keywords="why hired role owner sadia duties division">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="num">3</span>
+        <span class="title" data-en="Why This Role / Why You Were Hired" data-bn="কেন এই পদ / কেন আপনাকে নিয়োগ দেওয়া হয়েছে">Why This Role / Why You Were Hired</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="label" data-en="Possible questions" data-bn="সম্ভাব্য প্রশ্ন">Possible questions</div>
+        <div class="possible-box">
+          <ul>
+            <li data-en="Why did the company hire you specifically?" data-bn="কোম্পানি কেন বিশেষভাবে আপনাকে নিয়োগ দিয়েছে?">Why did the company hire you specifically?</li>
+            <li data-en="Why is this position needed?" data-bn="এই পদটি কেন প্রয়োজন?">Why is this position needed?</li>
+            <li data-en="How are duties divided between you and the owner?" data-bn="আপনার ও মালিকের মধ্যে দায়িত্ব কীভাবে ভাগ করা?">How are duties divided between you and the owner?</li>
+          </ul>
+        </div>
+        <div class="label" data-en="Recommended answer" data-bn="প্রস্তাবিত উত্তর">Recommended answer</div>
+        <div class="answer-box">
+          “I was hired because I have relevant experience as a Sales Officer with skills in sales, client handling, and negotiation.<br><br>
+          The company owner, Sadia Rafaqat, handles overall administration, staff management, and quality control.<br><br>
+          My role is focused only on commercial expansion — generating sales leads and securing new B2B contracts.”
+          <div class="bn">
+            <div class="bn-label">বাংলা</div>
+            “আমাকে নিয়োগ দেওয়া হয়েছে কারণ আমার Sales Officer হিসেবে প্রাসঙ্গিক অভিজ্ঞতা আছে — সেলস, ক্লায়েন্ট হ্যান্ডলিং এবং নেগোসিয়েশনে দক্ষতা।<br><br>
+            কোম্পানির মালিক Sadia Rafaqat সামগ্রিক প্রশাসন, স্টাফ ম্যানেজমেন্ট এবং কোয়ালিটি কন্ট্রোল করেন।<br><br>
+            আমার ভূমিকা শুধুমাত্র বাণিজ্যিক সম্প্রসারণে — সেলস লিড তৈরি এবং নতুন B2B চুক্তি নিশ্চিত করা।”
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="card open" data-keywords="previous application withdrawn management assistant switch change">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="num">4</span>
+        <span class="title" data-en="Previous Application (High Probability)" data-bn="পূর্ববর্তী আবেদন (উচ্চ সম্ভাবনা)">Previous Application (High Probability)</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="label" data-en="Possible questions" data-bn="সম্ভাব্য প্রশ্ন">Possible questions</div>
+        <div class="possible-box">
+          <ul>
+            <li data-en="Why was the first application for Management Assistant withdrawn?" data-bn="Management Assistant-এর প্রথম আবেদন কেন প্রত্যাহার করা হয়েছিল?">Why was the first application for Management Assistant withdrawn?</li>
+            <li data-en="Why did the job change from Management Assistant to Sales Consultant?" data-bn="কেন চাকরি Management Assistant থেকে Sales Consultant-এ পরিবর্তন করা হলো?">Why did the job change from Management Assistant to Sales Consultant?</li>
+          </ul>
+        </div>
+        <div class="label" data-en="Recommended answer (critical – stay consistent)" data-bn="প্রস্তাবিত উত্তর (গুরুত্বপূর্ণ – সামঞ্জস্য রাখুন)">Recommended answer (critical – stay consistent)</div>
+        <div class="answer-box">
+          “My employer initially applied for a Management Assistant role.<br><br>
+          After evaluating the company’s immediate operational priorities, management realised that administrative tasks could be handled internally by the owner, Sadia Rafaqat.<br><br>
+          The primary business need was generating new B2B sales and expanding client accounts.<br><br>
+          Therefore the first application was withdrawn and a new application was submitted for the Sales Consultant role to match the real operational focus of the business.”
+          <div class="bn">
+            <div class="bn-label">বাংলা</div>
+            “আমার নিয়োগকর্তা প্রথমে Management Assistant পদের জন্য আবেদন করেছিলেন।<br><br>
+            কোম্পানির তাৎক্ষণিক অপারেশনাল অগ্রাধিকার মূল্যায়ন করার পর ম্যানেজমেন্ট বুঝতে পারে যে প্রশাসনিক কাজ মালিক Sadia Rafaqat নিজেই সামলাতে পারবেন।<br><br>
+            ব্যবসার প্রধান প্রয়োজন ছিল নতুন B2B সেলস তৈরি এবং ক্লায়েন্ট অ্যাকাউন্ট সম্প্রসারণ।<br><br>
+            তাই প্রথম আবেদন প্রত্যাহার করে ব্যবসার আসল অপারেশনাল ফোকাসের সাথে মিলিয়ে Sales Consultant পদের জন্য নতুন আবেদন করা হয়।”
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="card" data-keywords="recruitment jobnet how find advertised">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="num">5</span>
+        <span class="title" data-en="Recruitment Process" data-bn="নিয়োগ প্রক্রিয়া">Recruitment Process</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="label" data-en="Possible questions" data-bn="সম্ভাব্য প্রশ্ন">Possible questions</div>
+        <div class="possible-box">
+          <ul>
+            <li data-en="How did you find this job?" data-bn="আপনি কীভাবে এই চাকরি খুঁজে পেলেন?">How did you find this job?</li>
+            <li data-en="Was the position advertised?" data-bn="পদটি বিজ্ঞাপন দেওয়া হয়েছিল কি?">Was the position advertised?</li>
+            <li data-en="Did you apply through Jobnet?" data-bn="আপনি Jobnet-এর মাধ্যমে আবেদন করেছিলেন কি?">Did you apply through Jobnet?</li>
+          </ul>
+        </div>
+        <div class="label" data-en="Recommended answer" data-bn="প্রস্তাবিত উত্তর">Recommended answer</div>
+        <div class="answer-box">
+          “The position was officially advertised on Jobnet on 2 March 2026.<br>
+          I applied directly through the public job advertisement after reviewing the required qualifications and responsibilities.”
+          <div class="bn">
+            <div class="bn-label">বাংলা</div>
+            “পদটি ২ মার্চ ২০২৬ তারিখে Jobnet-এ অফিসিয়ালি বিজ্ঞাপন দেওয়া হয়েছিল।<br>
+            প্রয়োজনীয় যোগ্যতা ও দায়িত্ব পর্যালোচনা করার পর আমি সরাসরি পাবলিক জব অ্যাডভার্টাইজমেন্টের মাধ্যমে আবেদন করেছি।”
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="card" data-keywords="salary 37170 pay nemkonto benefits">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="num">6</span>
+        <span class="title" data-en="Salary & Working Conditions" data-bn="বেতন ও কাজের শর্ত">Salary & Working Conditions</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="label" data-en="Possible questions" data-bn="সম্ভাব্য প্রশ্ন">Possible questions</div>
+        <div class="possible-box">
+          <ul>
+            <li data-en="What is your salary?" data-bn="আপনার বেতন কত?">What is your salary?</li>
+            <li data-en="Why is the salary set at this level?" data-bn="বেতন এই স্তরে কেন নির্ধারিত?">Why is the salary set at this level?</li>
+            <li data-en="How is salary paid?" data-bn="বেতন কীভাবে দেওয়া হয়?">How is salary paid?</li>
+            <li data-en="Are there other benefits?" data-bn="অন্যান্য সুবিধা আছে কি?">Are there other benefits?</li>
+          </ul>
+        </div>
+        <div class="label" data-en="Recommended answer" data-bn="প্রস্তাবিত উত্তর">Recommended answer</div>
+        <div class="answer-box">
+          “My monthly gross salary is DKK 37,170.<br><br>
+          It complies with the official scheme pay thresholds and reflects standard market conditions in Denmark for a full-time Sales Consultant working 37 hours per week.<br><br>
+          Salary is paid monthly to my NemKonto.”
+          <div class="bn">
+            <div class="bn-label">বাংলা</div>
+            “আমার মাসিক গ্রস বেতন DKK 37,170।<br><br>
+            এটি অফিসিয়াল স্কিমের পে থ্রেশহোল্ড মেনে চলে এবং ডেনমার্কে ফুল-টাইম Sales Consultant-এর (সপ্তাহে ৩৭ ঘণ্টা) স্ট্যান্ডার্ড মার্কেট কন্ডিশন প্রতিফলিত করে।<br><br>
+            বেতন মাসিক আমার NemKonto-তে দেওয়া হয়।”
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="card" data-keywords="company knowledge owner what does">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="num">7</span>
+        <span class="title" data-en="Company Knowledge" data-bn="কোম্পানি সম্পর্কে জ্ঞান">Company Knowledge</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="label" data-en="Possible questions" data-bn="সম্ভাব্য প্রশ্ন">Possible questions</div>
+        <div class="possible-box">
+          <ul>
+            <li data-en="What does the company do?" data-bn="কোম্পানি কী করে?">What does the company do?</li>
+            <li data-en="How many employees does the company have?" data-bn="কোম্পানিতে কতজন কর্মচারী আছে?">How many employees does the company have?</li>
+            <li data-en="Who is the owner / your manager?" data-bn="মালিক / আপনার ম্যানেজার কে?">Who is the owner / your manager?</li>
+          </ul>
+        </div>
+        <div class="label" data-en="How to answer" data-bn="কীভাবে উত্তর দেবেন">How to answer</div>
+        <div class="answer-box">
+          Be honest about what you know.<br><br>
+          Example: “Danske Superservice ApS provides cleaning and facility services. The owner is Sadia Rafaqat. I report to her on sales matters.”
+          <div class="bn">
+            <div class="bn-label">বাংলা</div>
+            আপনি যা জানেন তা সৎভাবে বলুন।<br><br>
+            উদাহরণ: “Danske Superservice ApS ক্লিনিং এবং ফ্যাসিলিটি সার্ভিস প্রদান করে। মালিক Sadia Rafaqat। আমি সেলস বিষয়ে তাঁর কাছে রিপোর্ট করি।”
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="card" data-keywords="start working long-term intentions other jobs">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="num">8</span>
+        <span class="title" data-en="Practical & Intentions Questions" data-bn="ব্যবহারিক ও উদ্দেশ্য সংক্রান্ত প্রশ্ন">Practical & Intentions Questions</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="label" data-en="Possible questions" data-bn="সম্ভাব্য প্রশ্ন">Possible questions</div>
+        <div class="possible-box">
+          <ul>
+            <li data-en="When will you start working?" data-bn="আপনি কখন কাজ শুরু করবেন?">When will you start working?</li>
+            <li data-en="Do you plan to stay long-term in Denmark?" data-bn="আপনি ডেনমার্কে দীর্ঘমেয়াদী থাকার পরিকল্পনা করছেন কি?">Do you plan to stay long-term in Denmark?</li>
+            <li data-en="Do you have other job offers or applications?" data-bn="আপনার অন্য কোনো চাকরির অফার বা আবেদন আছে কি?">Do you have other job offers or applications?</li>
+          </ul>
+        </div>
+        <div class="label" data-en="Recommended answer" data-bn="প্রস্তাবিত উত্তর">Recommended answer</div>
+        <div class="answer-box">
+          “I will start according to the contract once the permit is granted.<br>
+          I want to work full-time in this position and contribute to the company’s growth.”
+          <div class="bn">
+            <div class="bn-label">বাংলা</div>
+            “পারমিট পাওয়ার পর চুক্তি অনুযায়ী কাজ শুরু করব।<br>
+            আমি এই পদে ফুল-টাইম কাজ করতে চাই এবং কোম্পানির বৃদ্ধিতে অবদান রাখতে চাই।”
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CHECKLIST ================= -->
+  <div class="section" id="checklist">
+    <h2 class="section-title">
+      <span data-en="Interview Day Checklist" data-bn="ইন্টারভিউ দিনের চেকলিস্ট">Interview Day Checklist</span>
+    </h2>
+    <ul class="info-list checklist" id="checklist-items">
+      <li onclick="toggleCheck(this)"><input type="checkbox"> <span data-en="Arrive by <strong>08:30</strong> (30 minutes early)" data-bn="<strong>০৮:৩০</strong>-এর মধ্যে পৌঁছান (৩০ মিনিট আগে)">Arrive by <strong>08:30</strong> (30 minutes early)</span></li>
+      <li onclick="toggleCheck(this)"><input type="checkbox"> <span data-en="Bring the SIRI interview letter" data-bn="SIRI ইন্টারভিউ লেটার নিয়ে যান">Bring the SIRI interview letter</span></li>
+      <li onclick="toggleCheck(this)"><input type="checkbox"> <span data-en="Bring original passport" data-bn="মূল পাসপোর্ট নিয়ে যান">Bring original passport</span></li>
+      <li onclick="toggleCheck(this)"><input type="checkbox"> <span data-en="Bring residence card" data-bn="রেসিডেন্স কার্ড নিয়ে যান">Bring residence card</span></li>
+      <li onclick="toggleCheck(this)"><input type="checkbox"> <span data-en="Bring employment contract + job description" data-bn="এমপ্লয়মেন্ট কন্ট্রাক্ট + জব ডেসক্রিপশন নিয়ে যান">Bring employment contract + job description</span></li>
+      <li onclick="toggleCheck(this)"><input type="checkbox"> <span data-en="Wait in the citizen centre (no number needed)" data-bn="সিটিজেন সেন্টারে অপেক্ষা করুন (নম্বর নিতে হবে না)">Wait in the citizen centre (no number needed)</span></li>
+      <li onclick="toggleCheck(this)"><input type="checkbox"> <span data-en="Dress neatly and professionally" data-bn="পরিচ্ছন্ন ও পেশাদার পোশাক পরুন">Dress neatly and professionally</span></li>
+      <li onclick="toggleCheck(this)"><input type="checkbox"> <span data-en="Switch off your phone" data-bn="ফোন বন্ধ রাখুন">Switch off your phone</span></li>
+      <li onclick="toggleCheck(this)"><input type="checkbox"> <span data-en="Listen carefully to the interpreter and case officer (Zeba Ali)" data-bn="দোভাষী ও কেস অফিসার (Zeba Ali)-এর কথা মনোযোগ দিয়ে শুনুন">Listen carefully to the interpreter and case officer (Zeba Ali)</span></li>
+    </ul>
+    <div class="tip">
+      <strong data-en="Important legal note" data-bn="গুরুত্বপূর্ণ আইনি নোট">Important legal note</strong>
+      <span data-en="According to section 40 of the Danish Aliens Act you must attend. If you do not come, SIRI will decide based on the information they already have and your application may be refused." data-bn="ড্যানিশ এলিয়েনস অ্যাক্টের ধারা ৪০ অনুসারে আপনাকে উপস্থিত থাকতে হবে। না এলে SIRI তাদের কাছে থাকা তথ্যের ভিত্তিতে সিদ্ধান্ত নেবে এবং আপনার আবেদন প্রত্যাখ্যান হতে পারে।">According to section 40 of the Danish Aliens Act you must attend. If you do not come, SIRI will decide based on the information they already have and your application may be refused.</span>
+    </div>
+  </div>
+
+  <!-- ================= DOCUMENTS ================= -->
+  <div class="section" id="documents">
+    <h2 class="section-title">
+      <span data-en="Key Documents in Your Case" data-bn="আপনার কেসের গুরুত্বপূর্ণ নথি">Key Documents in Your Case</span>
+    </h2>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-icon">📄</div>
+        <div>
+          <strong data-en="Call for clarifying interview" data-bn="ক্ল্যারিফাইং ইন্টারভিউর জন্য আহ্বান">Call for clarifying interview</strong>
+          <span data-en="Letter dated 24 July 2026 – Case 26/095876 – Interview 7 Aug 2026 at 09:00" data-bn="২৪ জুলাই ২০২৬ তারিখের চিঠি – কেস ২৬/০৯৫৮৭৬ – ইন্টারভিউ ৭ আগস্ট ২০২৬, সকাল ৯টা">Letter dated 24 July 2026 – Case 26/095876 – Interview 7 Aug 2026 at 09:00</span>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">📝</div>
+        <div>
+          <strong data-en="Employment Contract (Sales Consultant)" data-bn="এমপ্লয়মেন্ট কন্ট্রাক্ট (Sales Consultant)">Employment Contract (Sales Consultant)</strong>
+          <span data-en="Danske Superservice ApS · Salary DKK 37,170 · 37 hours" data-bn="Danske Superservice ApS · বেতন DKK 37,170 · ৩৭ ঘণ্টা">Danske Superservice ApS · Salary DKK 37,170 · 37 hours</span>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">🌐</div>
+        <div>
+          <strong data-en="Jobnet advertisement" data-bn="Jobnet বিজ্ঞাপন">Jobnet advertisement</strong>
+          <span data-en="Published 2 March 2026 – Sales Consultant position" data-bn="প্রকাশিত ২ মার্চ ২০২৬ – Sales Consultant পদ">Published 2 March 2026 – Sales Consultant position</span>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">📋</div>
+        <div>
+          <strong data-en="Previous AR6 application (withdrawn)" data-bn="পূর্ববর্তী AR6 আবেদন (প্রত্যাহার)">Previous AR6 application (withdrawn)</strong>
+          <span data-en="Management Assistant at Renotech ApS – withdrawn 19 March 2026" data-bn="Renotech ApS-এ Management Assistant – ১৯ মার্চ ২০২৬ প্রত্যাহার">Management Assistant at Renotech ApS – withdrawn 19 March 2026</span>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">✅</div>
+        <div>
+          <strong data-en="Withdrawal confirmation" data-bn="প্রত্যাহার নিশ্চিতকরণ">Withdrawal confirmation</strong>
+          <span data-en="SIRI letter confirming withdrawal of first application (case 26/024467)" data-bn="প্রথম আবেদন প্রত্যাহার নিশ্চিতকারী SIRI চিঠি (কেস ২৬/০২৪৪৬৭)">SIRI letter confirming withdrawal of first application (case 26/024467)</span>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">⚖️</div>
+        <div>
+          <strong data-en="Power of Attorney / Legal representative" data-bn="পাওয়ার অব অ্যাটর্নি / আইনি প্রতিনিধি">Power of Attorney / Legal representative</strong>
+          <span data-en="S.H. Juridisk Rådgivning – Sara Khalaf" data-bn="S.H. Juridisk Rådgivning – Sara Khalaf">S.H. Juridisk Rådgivning – Sara Khalaf</span>
+        </div>
+      </div>
+    </div>
+    <div class="tip">
+      <strong data-en="What to bring tomorrow" data-bn="কাল কী নিয়ে যাবেন">What to bring tomorrow</strong>
+      <span data-en="You do not need to bring all old documents unless asked. Focus on: passport, residence card, interview letter, and current employment contract." data-bn="জিজ্ঞাসা না করলে সব পুরনো নথি নিয়ে যেতে হবে না। ফোকাস করুন: পাসপোর্ট, রেসিডেন্স কার্ড, ইন্টারভিউ লেটার এবং বর্তমান এমপ্লয়মেন্ট কন্ট্রাক্ট।">You do not need to bring all old documents unless asked. Focus on: passport, residence card, interview letter, and current employment contract.</span>
+    </div>
+  </div>
+
+  <!-- ================= FINAL ================= -->
+  <div class="section" id="final">
+    <h2 class="section-title">
+      <span data-en="What You Should Avoid" data-bn="যা এড়িয়ে চলবেন">What You Should Avoid</span>
+    </h2>
+    <ul class="info-list">
+      <li><span class="icon no">✗</span> <span data-en="Do not invent details." data-bn="বিস্তারিত উদ্ভাবন করবেন না।">Do not invent details.</span></li>
+      <li><span class="icon no">✗</span> <span data-en='Do not say the job is “mainly cleaning” or anything that does not match Sales Consultant.' data-bn='চাকরিকে “মূলত ক্লিনিং” বা Sales Consultant-এর সাথে না মিলে এমন কিছু বলবেন না।'>Do not say the job is “mainly cleaning” or anything that does not match Sales Consultant.</span></li>
+      <li><span class="icon no">✗</span> <span data-en="Do not criticise the previous application or the employer." data-bn="পূর্ববর্তী আবেদন বা নিয়োগকর্তার সমালোচনা করবেন না।">Do not criticise the previous application or the employer.</span></li>
+      <li><span class="icon no">✗</span> <span data-en="Do not discuss salary negotiations or personal financial problems." data-bn="বেতন আলোচনা বা ব্যক্তিগত আর্থিক সমস্যা নিয়ে আলোচনা করবেন না।">Do not discuss salary negotiations or personal financial problems.</span></li>
+      <li><span class="icon no">✗</span> <span data-en="Do not bring extra documents unless asked." data-bn="জিজ্ঞাসা না করলে অতিরিক্ত নথি আনবেন না।">Do not bring extra documents unless asked.</span></li>
+    </ul>
+
+    <h2 class="section-title" style="margin-top:28px;">
+      <span data-en="What SIRI Wants to Confirm" data-bn="SIRI কী নিশ্চিত করতে চায়">What SIRI Wants to Confirm</span>
+    </h2>
+    <ul class="info-list">
+      <li><span class="icon ok">1</span> <span data-en="The job is genuine." data-bn="চাকরিটি আসল।">The job is genuine.</span></li>
+      <li><span class="icon ok">2</span> <span data-en="The salary meets the scheme requirements (DKK 37,170)." data-bn="বেতন স্কিমের প্রয়োজনীয়তা পূরণ করে (DKK 37,170)।">The salary meets the scheme requirements (DKK 37,170).</span></li>
+      <li><span class="icon ok">3</span> <span data-en="Your duties match the Sales Consultant description (DISCO 332200) – not a lower-skilled role." data-bn="আপনার দায়িত্ব Sales Consultant বর্ণনার সাথে মেলে (DISCO 332200) – নিম্ন-দক্ষতার পদ নয়।">Your duties match the Sales Consultant description (DISCO 332200) – not a lower-skilled role.</span></li>
+      <li><span class="icon ok">4</span> <span data-en="The recruitment was open and proper (Jobnet advertisement)." data-bn="নিয়োগ উন্মুক্ত ও যথাযথ ছিল (Jobnet বিজ্ঞাপন)।">The recruitment was open and proper (Jobnet advertisement).</span></li>
+      <li><span class="icon ok">5</span> <span data-en="The switch from Management Assistant was a real business decision." data-bn="Management Assistant থেকে পরিবর্তন একটি আসল ব্যবসায়িক সিদ্ধান্ত ছিল।">The switch from Management Assistant was a real business decision.</span></li>
+    </ul>
+
+    <div class="tip" style="margin-top:24px;">
+      <strong data-en="Final message" data-bn="শেষ বার্তা">Final message</strong>
+      <span data-en="Stay calm. Speak clearly and stick to the prepared answers. You already have strong, consistent answers that match the submitted documents. Good luck tomorrow — you are well prepared." data-bn="শান্ত থাকুন। স্পষ্টভাবে কথা বলুন এবং প্রস্তুত উত্তরগুলোতে থাকুন। আপনার কাছে ইতিমধ্যেই শক্তিশালী, সামঞ্জস্যপূর্ণ উত্তর আছে যা জমা দেওয়া নথির সাথে মেলে। কাল সকালে শুভকামনা — আপনি ভালোভাবে প্রস্তুত।">Stay calm. Speak clearly and stick to the prepared answers. You already have strong, consistent answers that match the submitted documents. Good luck tomorrow — you are well prepared.</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Case 26/095876 · R A Md Motiur Rahman Rafi · SIRI Clarifying Interview · 7 August 2026
+</div>
+
+<!-- Scroll to top -->
+<button class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Top">↑</button>
+
+<script>
+  let currentLang = 'en';
+
+  // Language switch
+  function setLang(lang) {
+    currentLang = lang;
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-bn').classList.toggle('active', lang === 'bn');
+
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (text) el.innerHTML = text;
+    });
+
+    // Placeholder
+    const search = document.getElementById('search');
+    if (search) {
+      search.placeholder = search.getAttribute('data-' + lang + '-placeholder') || search.placeholder;
+    }
+
+    // Nav buttons
+    document.querySelectorAll('.nav button').forEach(btn => {
+      const t = btn.getAttribute('data-' + lang);
+      if (t) btn.textContent = t;
+    });
+  }
+
+  // Navigation
+  document.querySelectorAll('.nav button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.sec).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // Accordion
+  function toggleCard(el) {
+    el.parentElement.classList.toggle('open');
+  }
+
+  // Search
+  function filterCards() {
+    const q = document.getElementById('search').value.toLowerCase();
+    document.querySelectorAll('#questions .card').forEach(card => {
+      const text = (card.dataset.keywords + ' ' + card.textContent).toLowerCase();
+      card.style.display = (!q || text.includes(q)) ? '' : 'none';
+    });
+  }
+
+  // Checklist
+  function toggleCheck(li) {
+    const cb = li.querySelector('input');
+    cb.checked = !cb.checked;
+    li.classList.toggle('done', cb.checked);
+  }
+</script>
+</body>
+</html>
